@@ -1,0 +1,121 @@
+/* فونت وزیر - تعریف تمام وزن‌ها */
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Thin.woff2') format('woff2'),
+       url('./fonts/Vazir-Thin.woff') format('woff'),
+       url('./fonts/Vazir-Thin.ttf') format('truetype'),
+       url('./fonts/Vazir-Thin.eot') format('embedded-opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Light.woff2') format('woff2'),
+       url('./fonts/Vazir-Light.woff') format('woff'),
+       url('./fonts/Vazir-Light.ttf') format('truetype'),
+       url('./fonts/Vazir-Light.eot') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Regular.woff2') format('woff2'),
+       url('./fonts/Vazir-Regular.woff') format('woff'),
+       url('./fonts/Vazir-Regular.ttf') format('truetype'),
+       url('./fonts/Vazir-Regular.eot') format('embedded-opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Medium.woff2') format('woff2'),
+       url('./fonts/Vazir-Medium.woff') format('woff'),
+       url('./fonts/Vazir-Medium.ttf') format('truetype'),
+       url('./fonts/Vazir-Medium.eot') format('embedded-opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Bold.woff2') format('woff2'),
+       url('./fonts/Vazir-Bold.woff') format('woff'),
+       url('./fonts/Vazir-Bold.ttf') format('truetype'),
+       url('./fonts/Vazir-Bold.eot') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Bold-FD-WOL.woff2') format('woff2'),
+       url('./fonts/Vazir-Bold-FD-WOL.woff') format('woff'),
+       url('./fonts/Vazir-Bold-FD-WOL.ttf') format('truetype'),
+       url('./fonts/Vazir-Bold-FD-WOL.eot') format('embedded-opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Vazir';
+  src: url('./fonts/Vazir-Black.woff2') format('woff2'),
+       url('./fonts/Vazir-Black.woff') format('woff'),
+       url('./fonts/Vazir-Black.ttf') format('truetype'),
+       url('./fonts/Vazir-Black.eot') format('embedded-opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* اعمال فونت وزیر به کل پروژه */
+* {
+  font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+body {
+  font-family: 'Vazir', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* کلاس‌های کمکی برای وزن‌های مختلف فونت */
+.font-thin {
+  font-weight: 100;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-regular {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-black {
+  font-weight: 900;
+}

@@ -5,11 +5,13 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { RTL } from './components/RTL';
 import App from './App';
+import './assets/fonts.css';
+import './index.css';
 
 const theme = createTheme({
   direction: 'rtl',
   typography: {
-    fontFamily: 'Vazirmatn, Arial, sans-serif',
+    fontFamily: 'Vazir, Arial, sans-serif',
   },
   palette: {
     mode: 'light',
