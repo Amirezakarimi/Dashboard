@@ -12,24 +12,34 @@ import PersonalInfoCard from '../components/profile/PersonalInfoCard';
 import SettingsCard from '../components/profile/SettingsCard';
 import ChangePasswordDialog from '../components/profile/ChangePasswordDialog';
 import NotificationsSettingsDialog from '../components/profile/NotificationsSettingsDialog';
+import LanguageTimezoneDialog from '../components/profile/LanguageTimezoneDialog';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showSettingsDialog, setShowSettingsDialog] = useState(false);
+  const [showLangTzDialog, setShowLangTzDialog] = useState(false);
+  const [localeSettings, setLocaleSettings] = useState(() => {
+    try {
+      const raw = localStorage.getItem('localeSettings');
+      return raw ? JSON.parse(raw) : { language: 'fa', timezone: 'Asia/Tehran' };
+    } catch {
+      return { language: 'fa', timezone: 'Asia/Tehran' };
+    }
+  });
   const [showAlert, setShowAlert] = useState(false);
   
   // داده‌های نمونه کاربر
   const [userData, setUserData] = useState({
-    firstName: 'علی',
-    lastName: 'محمدی',
-    email: 'ali.mohammadi@example.com',
+    firstName: 'امیررضا',
+    lastName: 'کریمی',
+    email: 'Amirreza.karimi@example.com',
     phone: '+98 912 345 6789',
-    location: 'تهران، ایران',
+    location: 'ساری، ایران',
     role: 'مدیر سیستم',
     department: 'فناوری اطلاعات',
     joinDate: '1402/01/15',
-    avatar: 'AM',
+    avatar: 'AK',
     bio: 'توسعه‌دهنده ارشد با 5 سال تجربه در زمینه React و Node.js',
     skills: ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Docker'],
     status: 'فعال',
@@ -67,6 +77,24 @@ const Profile = () => {
 
   const handleNotificationsSettings = () => {
     setShowSettingsDialog(true);
+  };
+
+  const handleLanguageTimezoneSettings = () => {
+    setShowLangTzDialog(true);
+  };
+
+  const handleLocaleChange = (next) => {
+    setLocaleSettings(next);
+    try {
+      localStorage.setItem('localeSettings', JSON.stringify(next));
+    } catch {}
+    // اعمال زبان و جهت صفحه
+    document.documentElement.lang = next.language;
+    if (next.language === 'fa' || next.language === 'ar') {
+      document.documentElement.dir = 'rtl';
+    } else {
+      document.documentElement.dir = 'ltr';
+    }
   };
 
   return (
@@ -115,6 +143,7 @@ const Profile = () => {
           <SettingsCard
             onPasswordChange={handlePasswordChange}
             onNotificationsSettings={handleNotificationsSettings}
+            onLanguageTimezoneSettings={handleLanguageTimezoneSettings}
           />
         </Grid>
       </Grid>
@@ -128,6 +157,13 @@ const Profile = () => {
       <NotificationsSettingsDialog
         open={showSettingsDialog}
         onClose={() => setShowSettingsDialog(false)}
+      />
+
+      <LanguageTimezoneDialog
+        open={showLangTzDialog}
+        onClose={() => setShowLangTzDialog(false)}
+        value={localeSettings}
+        onChange={handleLocaleChange}
       />
     </Box>
   );

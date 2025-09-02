@@ -19,7 +19,7 @@ import {
   Language as LanguageIcon,
 } from '@mui/icons-material';
 
-const SettingsCard = ({ onPasswordChange, onNotificationsSettings }) => {
+const SettingsCard = ({ onPasswordChange, onNotificationsSettings, onLanguageTimezoneSettings }) => {
   return (
     <Card>
       <CardContent>
@@ -102,6 +102,7 @@ const SettingsCard = ({ onPasswordChange, onNotificationsSettings }) => {
               <Button
                 variant="outlined"
                 size="small"
+                onClick={onLanguageTimezoneSettings}
               >
                 تنظیمات
               </Button>
