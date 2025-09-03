@@ -32,6 +32,7 @@ import {
   Delete as DeleteIcon,
   Visibility as VisibilityIcon,
 } from '@mui/icons-material';
+import ExportCsvButton from '../components/ExportCsvButton';
 
 const Users = () => {
   const [page, setPage] = useState(0);
@@ -214,6 +215,8 @@ const Users = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  
+
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
@@ -259,32 +262,58 @@ const Users = () => {
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
         borderRadius: 3
       }}>
-        <TextField
-          fullWidth
-          placeholder="جستجو بر اساس نام یا ایمیل..."
-          value={searchTerm}
-          onChange={handleSearch}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon sx={{ color: '#667eea' }} />
-              </InputAdornment>
-            ),
-          }}
-          sx={{ 
-            maxWidth: 500,
-            '& .MuiOutlinedInput-root': {
-              borderRadius: 2,
-              '&:hover .MuiOutlinedInput-notchedOutline': {
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 2, flexWrap: 'wrap' }}>
+          <TextField
+            placeholder="جستجو بر اساس نام یا ایمیل..."
+            value={searchTerm}
+            onChange={handleSearch}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon sx={{ color: '#667eea' }} />
+                </InputAdornment>
+              ),
+            }}
+            sx={{ 
+              maxWidth: 500,
+              flex: 1,
+              '& .MuiOutlinedInput-root': {
+                borderRadius: 2,
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#667eea',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#667eea',
+                  borderWidth: 2,
+                },
+              }
+            }}
+          />
+          <ExportCsvButton
+            data={filteredUsers}
+            columns={[
+              { header: 'نام', value: 'name' },
+              { header: 'ایمیل', value: 'email' },
+              { header: 'نقش', value: (u) => getRoleLabel(u.role).label },
+              { header: 'وضعیت', value: (u) => getStatusLabel(u.status).label },
+              { header: 'تاریخ عضویت', value: 'joinDate' },
+              { header: 'آخرین ورود', value: 'lastLogin' },
+            ]}
+            filename="users.csv"
+            buttonProps={{
+              sx: {
+                borderRadius: 2,
+                px: 2.5,
+                color: '#667eea',
                 borderColor: '#667eea',
+                '&:hover': {
+                  backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                  borderColor: '#667eea',
+                },
               },
-              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                borderColor: '#667eea',
-                borderWidth: 2,
-              },
-            }
-          }}
-        />
+            }}
+          />
+        </Box>
       </Paper>
 
       {/* جدول کاربران */}

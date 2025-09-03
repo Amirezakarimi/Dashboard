@@ -8,6 +8,7 @@ import Content from './pages/Content';
 import Comments from './pages/Comments';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
+import Settings from './pages/Settings';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="content" element={<Content />} />
           <Route path="comments" element={<Comments />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </Box>

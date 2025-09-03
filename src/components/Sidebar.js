@@ -16,6 +16,7 @@ import {
   People as PeopleIcon,
   Article as ArticleIcon,
   Comment as CommentIcon,
+  Settings as SettingsIcon,
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ const menuItems = [
   { text: 'کاربران', icon: <PeopleIcon />, path: '/users' },
   { text: 'محتوا', icon: <ArticleIcon />, path: '/content' },
   { text: 'نظرات', icon: <CommentIcon />, path: '/comments' },
+  { text: 'تنظیمات', icon: <SettingsIcon />, path: '/settings' },
 ];
 
 const Sidebar = ({ mobileOpen, onDrawerToggle }) => {

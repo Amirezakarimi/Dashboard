@@ -146,9 +146,7 @@ const Header = ({ onDrawerToggle }) => {
             <MenuItem onClick={handleProfileClick}>
               <Typography variant="body2">پروفایل</Typography>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
-              <Typography variant="body2">تنظیمات</Typography>
-            </MenuItem>
+            
             <Divider />
             <MenuItem onClick={handleMenuClose}>
               <Typography variant="body2" color="error.main">خروج</Typography>
