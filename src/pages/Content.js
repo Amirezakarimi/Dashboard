@@ -34,6 +34,7 @@ import {
   Comment as CommentIcon,
   Category as CategoryIcon,
 } from '@mui/icons-material';
+import ImageUpload from '../components/ImageUpload';
 
 const Content = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -46,6 +47,7 @@ const Content = () => {
     category: '',
     status: 'published',
     content: '',
+    image: null,
   });
 
   // داده‌های نمونه محتوا
@@ -155,6 +157,7 @@ const Content = () => {
         category: content.category,
         status: content.status,
         content: content.description,
+        image: content.image ? { url: content.image, name: 'تصویر موجود' } : null,
       });
     } else {
       setEditingContent(null);
@@ -164,6 +167,7 @@ const Content = () => {
         category: '',
         status: 'published',
         content: '',
+        image: null,
       });
     }
     setOpenDialog(true);
@@ -178,6 +182,7 @@ const Content = () => {
       category: '',
       status: 'published',
       content: '',
+      image: null,
     });
   };
 
@@ -190,6 +195,13 @@ const Content = () => {
     setFormData({
       ...formData,
       [field]: event.target.value,
+    });
+  };
+
+  const handleImageChange = (imageData) => {
+    setFormData({
+      ...formData,
+      image: imageData,
     });
   };
 
@@ -406,6 +418,13 @@ const Content = () => {
               fullWidth
               multiline
               rows={3}
+            />
+            <ImageUpload
+              value={formData.image}
+              onChange={handleImageChange}
+              label="عکس محتوا"
+              helperText="فایل‌های مجاز: JPG, PNG, GIF, WebP (حداکثر 5 مگابایت)"
+              maxSize={5}
             />
             <Box sx={{ display: 'flex', gap: 2 }}>
               <FormControl sx={{ flex: 1 }}>
