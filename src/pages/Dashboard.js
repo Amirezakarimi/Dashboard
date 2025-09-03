@@ -20,6 +20,7 @@ import {
   Visibility as VisibilityIcon,
   ThumbUp as ThumbUpIcon,
 } from '@mui/icons-material';
+import VisitsAreaChart from '../components/charts/VisitsAreaChart';
 
 const StatCard = ({ title, value, icon, color, change }) => (
   <Card sx={{ 
@@ -131,6 +132,18 @@ const Dashboard = () => {
     { title: 'JavaScript ES6+', views: '5.4K', likes: '389' },
   ];
 
+  const visitsData = [
+    { label: 'فروردین', visits: 3200 },
+    { label: 'اردیبهشت', visits: 4100 },
+    { label: 'خرداد', visits: 3800 },
+    { label: 'تیر', visits: 4600 },
+    { label: 'مرداد', visits: 5200 },
+    { label: 'شهریور', visits: 6100 },
+    { label: 'مهر', visits: 5800 },
+    { label: 'آبان', visits: 6700 },
+    { label: 'آذر', visits: 7400 },
+  ];
+
   return (
     <Box sx={{ width: '100%' }}>
       <Typography variant="h4" component="h1" gutterBottom sx={{ 
@@ -155,6 +168,31 @@ const Dashboard = () => {
       </Grid>
 
       <Grid container spacing={3} sx={{ width: '100%' }}>
+        {/* نمودار بازدید کل */}
+        <Grid item xs={12}>
+          <Paper sx={{ 
+            p: 3, 
+            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            border: '1px solid rgba(0, 0, 0, 0.05)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+            }
+          }}>
+            <Typography variant="h6" gutterBottom sx={{ 
+              fontWeight: 700, 
+              mb: 3,
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              روند بازدید کل (ماهانه)
+            </Typography>
+            <VisitsAreaChart data={visitsData} />
+          </Paper>
+        </Grid>
         {/* فعالیت‌های اخیر */}
         <Grid item xs={12} md={6}>
           <Paper sx={{ 

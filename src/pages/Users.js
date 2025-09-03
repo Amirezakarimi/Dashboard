@@ -16,10 +16,6 @@ import {
   IconButton,
   TextField,
   InputAdornment,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   FormControl,
   InputLabel,
   Select,
@@ -33,6 +29,8 @@ import {
   Visibility as VisibilityIcon,
 } from '@mui/icons-material';
 import ExportCsvButton from '../components/ExportCsvButton';
+import ExportPdfButton from '../components/ExportPdfButton';
+import UserDialog from '../components/users/UserDialog';
 
 const Users = () => {
   const [page, setPage] = useState(0);
@@ -289,30 +287,52 @@ const Users = () => {
               }
             }}
           />
-          <ExportCsvButton
-            data={filteredUsers}
-            columns={[
-              { header: 'نام', value: 'name' },
-              { header: 'ایمیل', value: 'email' },
-              { header: 'نقش', value: (u) => getRoleLabel(u.role).label },
-              { header: 'وضعیت', value: (u) => getStatusLabel(u.status).label },
-              { header: 'تاریخ عضویت', value: 'joinDate' },
-              { header: 'آخرین ورود', value: 'lastLogin' },
-            ]}
-            filename="users.csv"
-            buttonProps={{
-              sx: {
-                borderRadius: 2,
-                px: 2.5,
-                color: '#667eea',
-                borderColor: '#667eea',
-                '&:hover': {
-                  backgroundColor: 'rgba(102, 126, 234, 0.08)',
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <ExportCsvButton
+              data={filteredUsers}
+              columns={[
+                { header: 'نام', value: 'name' },
+                { header: 'ایمیل', value: 'email' },
+                { header: 'نقش', value: (u) => getRoleLabel(u.role).label },
+                { header: 'وضعیت', value: (u) => getStatusLabel(u.status).label },
+                { header: 'تاریخ عضویت', value: 'joinDate' },
+                { header: 'آخرین ورود', value: 'lastLogin' },
+              ]}
+              filename="users.csv"
+              buttonProps={{
+                sx: {
+                  borderRadius: 2,
+                  px: 2.5,
+                  color: '#667eea',
                   borderColor: '#667eea',
+                  '&:hover': {
+                    backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                    borderColor: '#667eea',
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+            <ExportPdfButton
+              title="گزارش کاربران"
+              data={filteredUsers}
+              columns={[
+                { header: 'نام', value: 'name' },
+                { header: 'ایمیل', value: 'email' },
+                { header: 'نقش', value: (u) => getRoleLabel(u.role).label },
+                { header: 'وضعیت', value: (u) => getStatusLabel(u.status).label },
+                { header: 'تاریخ عضویت', value: 'joinDate' },
+                { header: 'آخرین ورود', value: 'lastLogin' },
+              ]}
+              filename="users.pdf"
+              orientation="l"
+              buttonProps={{
+                sx: {
+                  borderRadius: 2,
+                  px: 2.5,
+                },
+              }}
+            />
+          </Box>
         </Box>
       </Paper>
 
@@ -451,70 +471,14 @@ const Users = () => {
       </Paper>
 
       {/* دیالوگ افزودن/ویرایش کاربر */}
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-        <DialogTitle>
-          {editingUser ? 'ویرایش کاربر' : 'افزودن کاربر جدید'}
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}>
-                         <TextField
-               label="نام کامل"
-               value={formData.name}
-               onChange={handleInputChange('name')}
-               fullWidth
-               required
-               InputLabelProps={{
-                 required: true,
-                 sx: { '& .MuiFormLabel-asterisk': { color: 'red' } }
-               }}
-             />
-             <TextField
-               label="ایمیل"
-               type="email"
-               value={formData.email}
-               onChange={handleInputChange('email')}
-               fullWidth
-               required
-               InputLabelProps={{
-                 required: true,
-                 sx: { '& .MuiFormLabel-asterisk': { color: 'red' } }
-               }}
-             />
-             <FormControl fullWidth required>
-               <InputLabel sx={{ '& .MuiFormLabel-asterisk': { color: 'red' } }}>
-                 نقش
-               </InputLabel>
-               <Select
-                 value={formData.role}
-                 label="نقش"
-                 onChange={handleInputChange('role')}
-               >
-                 <MenuItem value="user">کاربر</MenuItem>
-                 <MenuItem value="moderator">ناظر</MenuItem>
-                 <MenuItem value="admin">مدیر</MenuItem>
-               </Select>
-             </FormControl>
-            <FormControl fullWidth>
-              <InputLabel>وضعیت</InputLabel>
-              <Select
-                value={formData.status}
-                label="وضعیت"
-                onChange={handleInputChange('status')}
-              >
-                <MenuItem value="active">فعال</MenuItem>
-                <MenuItem value="inactive">غیرفعال</MenuItem>
-                <MenuItem value="pending">در انتظار</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>انصراف</Button>
-          <Button onClick={handleSubmit} variant="contained">
-            {editingUser ? 'به‌روزرسانی' : 'افزودن'}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <UserDialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        editingUser={editingUser}
+        formData={formData}
+        onInputChange={handleInputChange}
+        onSubmit={handleSubmit}
+      />
     </Box>
   );
 };
