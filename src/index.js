@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { RTL } from './components/RTL';
 import App from './App';
+import { ThemeModeProvider } from './contexts/ThemeModeContext';
 import './assets/fonts.css';
 import './index.css';
 
@@ -60,12 +61,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ThemeModeProvider>
         <RTL>
-          <CssBaseline />
           <App />
         </RTL>
-      </ThemeProvider>
+      </ThemeModeProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import {
   Box,
   Card,
@@ -10,6 +10,8 @@ import {
   Divider,
   Stack,
   Chip,
+  ToggleButtonGroup,
+  ToggleButton,
 } from '@mui/material';
 import {
   Security as SecurityIcon,
@@ -21,6 +23,7 @@ import {
 import ChangePasswordDialog from '../components/profile/ChangePasswordDialog';
 import NotificationsSettingsDialog from '../components/profile/NotificationsSettingsDialog';
 import LanguageTimezoneDialog from '../components/profile/LanguageTimezoneDialog';
+import { ThemeModeContext } from '../contexts/ThemeModeContext';
 
 const SectionCard = ({ title, icon, children, actions }) => (
   <Card sx={{ mb: 3 }}>
@@ -40,6 +43,7 @@ const SectionCard = ({ title, icon, children, actions }) => (
 
 const Settings = () => {
   const [tab, setTab] = useState(0);
+  const { mode, setMode, effectiveMode } = useContext(ThemeModeContext);
 
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showNotificationsDialog, setShowNotificationsDialog] = useState(false);
@@ -146,9 +150,31 @@ const Settings = () => {
           title="ظاهر و تم"
           icon={<PaletteIcon color="primary" />}
         >
-          <Typography variant="body2" color="text.secondary">
-            به‌زودی: انتخاب تم روشن/تاریک و رنگ‌های سفارشی.
-          </Typography>
+          <Stack spacing={2}>
+            <Typography variant="body2" color="text.secondary">
+              حالت تم را انتخاب کنید. حالت «سیستمی» مطابق تنظیمات سیستم‌عامل شما تغییر می‌کند.
+            </Typography>
+
+            <ToggleButtonGroup
+              value={mode}
+              exclusive
+              onChange={(e, v) => {
+                if (v) setMode(v);
+              }}
+              aria-label="theme mode"
+              size="small"
+              sx={{ direction: 'ltr' }}
+            >
+              <ToggleButton value="light" aria-label="light">روشن</ToggleButton>
+              <ToggleButton value="dark" aria-label="dark">تاریک</ToggleButton>
+              <ToggleButton value="system" aria-label="system">سیستمی</ToggleButton>
+            </ToggleButtonGroup>
+
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Chip label={`وضعیت فعلی: ${effectiveMode === 'dark' ? 'تاریک' : 'روشن'}`} color={effectiveMode === 'dark' ? 'default' : 'primary'} size="small" />
+              <Chip label={`انتخاب شما: ${mode === 'system' ? 'سیستمی' : mode === 'dark' ? 'تاریک' : 'روشن'}`} size="small" />
+            </Stack>
+          </Stack>
         </SectionCard>
       )}
 

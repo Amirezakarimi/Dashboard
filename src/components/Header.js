@@ -60,11 +60,20 @@ const Header = ({ onDrawerToggle }) => {
         position="fixed"
         sx={{
           width: '100%',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark'
+              ? 'rgba(17, 24, 39, 0.9)'
+              : 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(10px)',
           color: 'text.primary',
-          boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.08)',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
+          boxShadow: (theme) =>
+            theme.palette.mode === 'dark'
+              ? '0 4px 20px 0 rgba(0, 0, 0, 0.4)'
+              : '0 4px 20px 0 rgba(0, 0, 0, 0.08)',
+          borderBottom: (theme) =>
+            theme.palette.mode === 'dark'
+              ? '1px solid rgba(255, 255, 255, 0.08)'
+              : '1px solid rgba(0, 0, 0, 0.05)',
           zIndex: (theme) => theme.zIndex.drawer + 1,
         }}
       >

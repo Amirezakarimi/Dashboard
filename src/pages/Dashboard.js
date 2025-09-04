@@ -25,13 +25,25 @@ import VisitsAreaChart from '../components/charts/VisitsAreaChart';
 const StatCard = ({ title, value, icon, color, change }) => (
   <Card sx={{ 
     height: '100%',
-    background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-    border: '1px solid rgba(0, 0, 0, 0.05)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+    background: (theme) =>
+      theme.palette.mode === 'dark'
+        ? 'linear-gradient(135deg, #0b1220 0%, #111827 100%)'
+        : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+    border: (theme) =>
+      theme.palette.mode === 'dark'
+        ? '1px solid rgba(255, 255, 255, 0.08)'
+        : '1px solid rgba(0, 0, 0, 0.05)',
+    boxShadow: (theme) =>
+      theme.palette.mode === 'dark'
+        ? '0 4px 20px rgba(0, 0, 0, 0.45)'
+        : '0 4px 20px rgba(0, 0, 0, 0.08)',
     transition: 'all 0.3s ease',
     '&:hover': {
       transform: 'translateY(-4px)',
-      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+      boxShadow: (theme) =>
+        theme.palette.mode === 'dark'
+          ? '0 8px 30px rgba(0, 0, 0, 0.55)'
+          : '0 8px 30px rgba(0, 0, 0, 0.12)',
     }
   }}>
     <CardContent sx={{ p: 3 }}>
@@ -172,12 +184,24 @@ const Dashboard = () => {
         <Grid item xs={12}>
           <Paper sx={{ 
             p: 3, 
-            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            background: (theme) =>
+              theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, #0b1220 0%, #111827 100%)'
+                : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            border: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.08)'
+                : '1px solid rgba(0, 0, 0, 0.05)',
+            boxShadow: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '0 4px 20px rgba(0, 0, 0, 0.45)'
+                : '0 4px 20px rgba(0, 0, 0, 0.08)',
             transition: 'all 0.3s ease',
             '&:hover': {
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+              boxShadow: (theme) =>
+                theme.palette.mode === 'dark'
+                  ? '0 8px 30px rgba(0, 0, 0, 0.55)'
+                  : '0 8px 30px rgba(0, 0, 0, 0.12)',
             }
           }}>
             <Typography variant="h6" gutterBottom sx={{ 
@@ -198,12 +222,24 @@ const Dashboard = () => {
           <Paper sx={{ 
             p: 3, 
             height: '100%',
-            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            background: (theme) =>
+              theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, #0b1220 0%, #111827 100%)'
+                : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            border: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.08)'
+                : '1px solid rgba(0, 0, 0, 0.05)',
+            boxShadow: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '0 4px 20px rgba(0, 0, 0, 0.45)'
+                : '0 4px 20px rgba(0, 0, 0, 0.08)',
             transition: 'all 0.3s ease',
             '&:hover': {
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+              boxShadow: (theme) =>
+                theme.palette.mode === 'dark'
+                  ? '0 8px 30px rgba(0, 0, 0, 0.55)'
+                  : '0 8px 30px rgba(0, 0, 0, 0.12)',
             }
           }}>
             <Typography variant="h6" gutterBottom sx={{ 
@@ -249,12 +285,24 @@ const Dashboard = () => {
           <Paper sx={{ 
             p: 3, 
             height: '100%',
-            background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+            background: (theme) =>
+              theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, #0b1220 0%, #111827 100%)'
+                : 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+            border: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.08)'
+                : '1px solid rgba(0, 0, 0, 0.05)',
+            boxShadow: (theme) =>
+              theme.palette.mode === 'dark'
+                ? '0 4px 20px rgba(0, 0, 0, 0.45)'
+                : '0 4px 20px rgba(0, 0, 0, 0.08)',
             transition: 'all 0.3s ease',
             '&:hover': {
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+              boxShadow: (theme) =>
+                theme.palette.mode === 'dark'
+                  ? '0 8px 30px rgba(0, 0, 0, 0.55)'
+                  : '0 8px 30px rgba(0, 0, 0, 0.12)',
             }
           }}>
             <Typography variant="h6" gutterBottom sx={{ 
