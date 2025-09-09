@@ -280,6 +280,18 @@ const Users = () => {
         borderRadius: 3,
         overflow: 'hidden'
       }}>
+        <TablePagination
+          component="div"
+          count={filteredUsers.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          rowsPerPageOptions={[10, 25, 50, 100]}
+          labelRowsPerPage="تعداد ردیف در صفحه:"
+          labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
+          sx={{ borderBottom: '1px solid rgba(102, 126, 234, 0.1)', py: 1 }}
+        />
         <TableContainer>
           <Table sx={{
             '& .MuiTableHead-root': {
@@ -393,17 +405,6 @@ const Users = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        
-        <TablePagination
-          component="div"
-          count={filteredUsers.length}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          labelRowsPerPage="تعداد ردیف در صفحه:"
-          labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
-        />
       </Paper>
 
       {/* دیالوگ افزودن/ویرایش کاربر */}
