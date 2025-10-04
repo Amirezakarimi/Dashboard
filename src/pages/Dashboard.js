@@ -21,6 +21,7 @@ import {
   ThumbUp as ThumbUpIcon,
 } from '@mui/icons-material';
 import VisitsAreaChart from '../components/charts/VisitsAreaChart';
+import NotificationDemo from '../components/NotificationDemo';
 
 const StatCard = ({ title, value, icon, color, change }) => (
   <Card sx={{ 
@@ -178,6 +179,9 @@ const Dashboard = () => {
           </Grid>
         ))}
       </Grid>
+
+      {/* تست سیستم اعلانات */}
+      <NotificationDemo />
 
       <Grid container spacing={3} sx={{ width: '100%' }}>
         {/* نمودار بازدید کل */}

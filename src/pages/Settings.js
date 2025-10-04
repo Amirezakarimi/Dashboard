@@ -19,6 +19,7 @@ import {
   Palette as PaletteIcon,
   Language as LanguageIcon,
   Settings as SettingsIcon,
+  Telegram as TelegramIcon,
 } from '@mui/icons-material';
 import ChangePasswordDialog from '../components/profile/ChangePasswordDialog';
 import NotificationsSettingsDialog from '../components/profile/NotificationsSettingsDialog';
@@ -48,6 +49,16 @@ const Settings = () => {
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showNotificationsDialog, setShowNotificationsDialog] = useState(false);
   const [showLangTzDialog, setShowLangTzDialog] = useState(false);
+
+  // Mock notification settings state - in real app, this would come from backend/localStorage
+  const [notificationSettings, setNotificationSettings] = useState({
+    email: 'all',
+    system: 'enabled',
+    telegram: {
+      enabled: false,
+      connected: false,
+    }
+  });
 
   const [localeSettings, setLocaleSettings] = useState(() => {
     try {
@@ -120,11 +131,27 @@ const Settings = () => {
             </Button>
           }
         >
-          <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
             نحوه دریافت اعلانات را مدیریت کنید.
           </Typography>
-          <Chip label="ایمیل: همه" size="small" sx={{ mr: 1 }} />
-          <Chip label="سیستم: فعال" size="small" />
+          <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            <Chip 
+              label={`ایمیل: ${notificationSettings.email === 'all' ? 'همه' : notificationSettings.email === 'important' ? 'مهم' : 'هیچ‌کدام'}`} 
+              size="small" 
+              color={notificationSettings.email === 'all' ? 'primary' : 'default'}
+            />
+            <Chip 
+              label={`سیستم: ${notificationSettings.system === 'enabled' ? 'فعال' : 'غیرفعال'}`} 
+              size="small" 
+              color={notificationSettings.system === 'enabled' ? 'success' : 'default'}
+            />
+            <Chip 
+              icon={<TelegramIcon />}
+              label={`تلگرام: ${notificationSettings.telegram.enabled ? (notificationSettings.telegram.connected ? 'متصل' : 'قطع') : 'غیرفعال'}`} 
+              size="small" 
+              color={notificationSettings.telegram.enabled ? (notificationSettings.telegram.connected ? 'success' : 'warning') : 'default'}
+            />
+          </Stack>
         </SectionCard>
       )}
 
