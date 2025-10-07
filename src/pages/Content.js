@@ -51,7 +51,7 @@ const Content = () => {
   });
 
   // داده‌های نمونه محتوا
-  const contents = [
+  const [contents, setContents] = useState([
     {
       id: 1,
       title: 'راهنمای کامل React برای مبتدیان',
@@ -130,7 +130,7 @@ const Content = () => {
       comments: 8,
       image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=200&fit=crop&auto=format',
     },
-  ];
+  ]);
 
   const categories = [
     { value: 'all', label: 'همه دسته‌ها' },
@@ -187,7 +187,40 @@ const Content = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Content data:', formData);
+    // اگر در حال ویرایش هستیم
+    if (editingContent) {
+      const updated = contents.map((item) => {
+        if (item.id !== editingContent.id) return item;
+        return {
+          ...item,
+          title: formData.title,
+          description: formData.description,
+          category: formData.category,
+          status: formData.status,
+          // اگر تصویر جدید انتخاب شده از url آن استفاده شود، در غیر این صورت قبلی حفظ شود
+          image: formData.image && formData.image.url ? formData.image.url : item.image,
+        };
+      });
+      setContents(updated);
+    } else {
+      // افزودن محتوای جدید
+      const nextId = contents.length ? Math.max(...contents.map(c => c.id)) + 1 : 1;
+      const newItem = {
+        id: nextId,
+        title: formData.title,
+        description: formData.description,
+        category: formData.category || 'programming',
+        status: formData.status || 'published',
+        author: 'مدیر',
+        publishDate: new Date().toLocaleDateString('fa-IR'),
+        views: 0,
+        likes: 0,
+        comments: 0,
+        image: formData.image && formData.image.url ? formData.image.url : null,
+      };
+      setContents([newItem, ...contents]);
+    }
+
     handleCloseDialog();
   };
 
