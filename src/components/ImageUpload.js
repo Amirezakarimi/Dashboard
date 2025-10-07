@@ -197,9 +197,11 @@ const ImageUpload = ({
                <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
                  {value.name}
                </Typography>
-               <Typography variant="caption" color="text.secondary">
-                 {formatFileSize(value.size)} • {value.type.split('/')[1].toUpperCase()}
-               </Typography>
+              <Typography variant="caption" color="text.secondary">
+                {value.size ? formatFileSize(value.size) : ''}
+                {value.size && value.type ? ' • ' : ''}
+                {value.type ? (value.type.split('/')[1] || value.type).toUpperCase() : 'تصویر'}
+              </Typography>
              </Box>
              <IconButton
                color="error"
